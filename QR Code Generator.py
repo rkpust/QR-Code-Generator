@@ -1,6 +1,11 @@
 import tkinter as tk
+import qrcode
 import sys
 import os
+import io
+
+from tkinter import ttk, messagebox
+from PIL import Image, ImageTk
 
 # PyInstaller sets icon automatically
 def resource_path(relative_path):
@@ -12,6 +17,33 @@ def resource_path(relative_path):
 
     return os.path.join(base_path, relative_path)
 
+# Global QR image holder
+qr_image = None
+
+def generate_qr():
+    global qr_image
+    data = entry.get()
+    if not data.strip():
+        messagebox.showwarning("Input Error", "Please enter some text or URL.")
+        return
+
+    # Generate QR code
+    qr = qrcode.QRCode(version=1, box_size=10, border=2)
+    qr.add_data(data)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black", back_color="white")
+
+    # Convert to PhotoImage
+    img_bytes = io.BytesIO()
+    img.save(img_bytes, format='PNG')
+    img_bytes.seek(0)
+    qr_image = Image.open(img_bytes).resize((200, 200))
+    tk_image = ImageTk.PhotoImage(qr_image)
+
+    qr_label.config(image=tk_image)
+    qr_label.image = tk_image  # Prevent GC
+    save_btn.config(state='normal')
+
 # GUI setup
 root = tk.Tk()
 root.title("QR Code Generator")
@@ -19,6 +51,24 @@ icon_path = resource_path("RezaulKarim.ico")
 root.iconbitmap(icon_path)
 root.geometry("400x500")
 root.resizable(False, False)
+
+# Style
+style = ttk.Style()
+style.configure("TButton", font=("Segoe UI", 10))
+style.configure("TLabel", font=("Segoe UI", 10))
+style.configure("Header.TLabel", font=("Segoe UI", 14, "bold"))
+
+# Widgets
+ttk.Label(root, text="QR Code Generator", style="Header.TLabel").pack(pady=10)
+ttk.Label(root, text="Enter text or URL below:").pack(pady=5)
+
+entry = ttk.Entry(root, width=40)
+entry.pack(pady=5)
+
+ttk.Button(root, text="Generate QR Code", command=generate_qr).pack(pady=10)
+
+qr_label = tk.Label(root)  # 🆕 Changed to tk.Label for image support
+qr_label.pack(pady=10)
 
 # Run the app
 root.mainloop()
