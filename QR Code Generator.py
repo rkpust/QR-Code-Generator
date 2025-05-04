@@ -98,7 +98,7 @@ qr_label.pack(pady=10)
 btn_frame = ttk.Frame(root)
 btn_frame.pack(pady=5)
 
-save_btn = ttk.Button(btn_frame, text="💾 Save QR Code", command=save_qr, state='disabled')
+save_btn = ttk.Button(btn_frame, text="💾 Save", command=save_qr, state='disabled')
 save_btn.pack(side='left', padx=10)
 
 reset_btn = ttk.Button(btn_frame, text="🔁 Reset", command=reset_all)
