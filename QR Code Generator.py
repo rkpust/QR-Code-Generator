@@ -1,4 +1,5 @@
 import tkinter as tk
+import webbrowser
 import qrcode
 import sys
 import os
@@ -63,6 +64,10 @@ def reset_all():
     save_btn.config(state='disabled')     # Disable save
     qr_image = None
 
+# Open Link in Browser
+def open_link(event):
+    webbrowser.open_new("https://github.com/rkpust/QR-Code-Generator")  # replace with your actual link
+
 # GUI setup
 root = tk.Tk()
 root.title("QR Code Generator")
@@ -98,6 +103,17 @@ save_btn.pack(side='left', padx=10)
 
 reset_btn = ttk.Button(btn_frame, text="🔁 Reset", command=reset_all)
 reset_btn.pack(side='left', padx=10)
+
+# Create Copyright label with link-like appearance
+copyright_label = tk.Label(
+    root,
+    text="© Rezaul Karim | 2025",
+    fg="blue",
+    cursor="hand2",
+)
+
+copyright_label.pack(pady=5)
+copyright_label.bind("<Button-1>", open_link)
 
 # Run the app
 root.mainloop()
