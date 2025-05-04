@@ -4,7 +4,7 @@ import sys
 import os
 import io
 
-from tkinter import ttk, messagebox
+from tkinter import ttk, messagebox, filedialog
 from PIL import Image, ImageTk
 
 # PyInstaller sets icon automatically
@@ -44,6 +44,16 @@ def generate_qr():
     qr_label.image = tk_image  # Prevent GC
     save_btn.config(state='normal')
 
+# Save qr code function
+def save_qr():
+    if qr_image:
+        file_path = filedialog.asksaveasfilename(defaultextension=".png",
+                                                 filetypes=[("PNG files", "*.png")],
+                                                 title="Save QR Code")
+        if file_path:
+            qr_image.save(file_path)
+            messagebox.showinfo("Saved", f"QR code saved to:\n{file_path}")
+
 # GUI setup
 root = tk.Tk()
 root.title("QR Code Generator")
@@ -69,6 +79,13 @@ ttk.Button(root, text="Generate QR Code", command=generate_qr).pack(pady=10)
 
 qr_label = tk.Label(root)  # 🆕 Changed to tk.Label for image support
 qr_label.pack(pady=10)
+
+# 🆕 Frame to hold buttons side-by-side
+btn_frame = ttk.Frame(root)
+btn_frame.pack(pady=5)
+
+save_btn = ttk.Button(btn_frame, text="💾 Save QR Code", command=save_qr, state='disabled')
+save_btn.pack(side='left', padx=10)
 
 # Run the app
 root.mainloop()
