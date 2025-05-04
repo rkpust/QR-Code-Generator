@@ -54,6 +54,15 @@ def save_qr():
             qr_image.save(file_path)
             messagebox.showinfo("Saved", f"QR code saved to:\n{file_path}")
 
+# 🆕 Reset function
+def reset_all():
+    global qr_image
+    entry.delete(0, tk.END)               # Clear input
+    qr_label.config(image='')             # Clear image
+    qr_label.image = None
+    save_btn.config(state='disabled')     # Disable save
+    qr_image = None
+
 # GUI setup
 root = tk.Tk()
 root.title("QR Code Generator")
@@ -86,6 +95,9 @@ btn_frame.pack(pady=5)
 
 save_btn = ttk.Button(btn_frame, text="💾 Save QR Code", command=save_qr, state='disabled')
 save_btn.pack(side='left', padx=10)
+
+reset_btn = ttk.Button(btn_frame, text="🔁 Reset", command=reset_all)
+reset_btn.pack(side='left', padx=10)
 
 # Run the app
 root.mainloop()
