@@ -15,3 +15,9 @@
 - Then you will see the 'Run anyway' button, now click here.
 - !!! Boom !!! the app is running.
 - Thanks for using it.
+
+### Method 2
+- You can download this repository directly from [here](https://github.com/rkpust/QR-Code-Generator/). Find the green button, Code > Download ZIP. Otherwise, follow the command:
+```
+git clone https://github.com/rkpust/QR-Code-Generator
+```
