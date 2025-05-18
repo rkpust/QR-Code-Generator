@@ -21,3 +21,26 @@
 ```
 git clone https://github.com/rkpust/QR-Code-Generator
 ```
+
+- Create a virtual environment and activate it. Python 3.11.5 is recommended.
+```
+python -m venv venv_name
+venv_name\Scripts\activate
+```
+
+- Install the required packages with the following command.
+```
+pip install -r requirements.txt
+```
+
+- Run the following command to build your target app.
+```
+pyinstaller --onefile --noconsole --icon="RezaulKarim.ico" --add-data "RezaulKarim.ico;." "QR Code Generator.py"
+```
+- **!!! Boom !!!** Wait for a while; you will see two folders named 'build' and 'dist'. You will find your targeted app in the 'dist' folder.
+- After building, you need to double-click on the app.
+- You may get a warning from 'Microsoft Defender SmartScreen' for the first time; click on 'More info'.
+- Then you will see the 'Run Anyway' button; now click here.
+- **!!! Congratulations !!!** The app has been successfully run.
+- Thanks for using it.
+  
