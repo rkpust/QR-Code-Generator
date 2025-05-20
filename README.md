@@ -19,7 +19,7 @@
 ### Method 2
 - You can download this repository directly from [here](https://github.com/rkpust/QR-Code-Generator/). Find the green button, Code > Download ZIP. Otherwise, follow the command:
 ```
-git clone https://github.com/rkpust/QR-Code-Generator
+git clone https://github.com/rkpust/QR-Code-Generator.git
 ```
 
 - Create a virtual environment and activate it. Python 3.11.5 is recommended.
